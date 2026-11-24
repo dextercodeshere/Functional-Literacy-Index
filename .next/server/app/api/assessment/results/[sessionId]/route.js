@@ -1,0 +1,20 @@
+"use strict";(()=>{var e={};e.id=868,e.ids=[868],e.modules={399:e=>{e.exports=require("next/dist/compiled/next-server/app-page.runtime.prod.js")},517:e=>{e.exports=require("next/dist/compiled/next-server/app-route.runtime.prod.js")},5861:e=>{e.exports=require("node:sqlite")},7561:e=>{e.exports=require("node:fs")},9411:e=>{e.exports=require("node:path")},4530:(e,s,t)=>{t.r(s),t.d(s,{originalPathname:()=>g,patchFetch:()=>v,requestAsyncStorage:()=>p,routeModule:()=>c,serverHooks:()=>m,staticGenerationAsyncStorage:()=>d});var n={};t.r(n),t.d(n,{GET:()=>u});var o=t(9303),a=t(8716),i=t(3131),r=t(7070),l=t(5748),_=t(716);async function u(e,{params:s}){try{(0,_.Y)();let e=(0,l.z)(),t=s.sessionId,n=e.prepare(`
+      SELECT r.*, s.state_id, s.city_id, s.city_other, s.language_code, s.answers_json,
+             st.name as state_name, c.name as city_name, l.name as language_name
+      FROM assessment_results r
+      JOIN assessment_sessions s ON r.session_id = s.id
+      LEFT JOIN states st ON s.state_id = st.id
+      LEFT JOIN cities c ON s.city_id = c.id
+      LEFT JOIN languages l ON s.language_code = l.code
+      WHERE r.session_id = ?
+    `).get(t);if(!n)return r.NextResponse.json({success:!1,error:"Result not found for this session."},{status:404});let o=e.prepare(`
+      SELECT id, level_number, level_title, question_text, options_json, correct_answer, explanation,
+             stimulus_title, stimulus_content, skill_category
+      FROM questions
+      WHERE set_code = 'SET_A'
+      ORDER BY level_number ASC, question_number ASC
+    `).all(),a={};if("en"!==n.language_code)for(let s of e.prepare(`
+        SELECT question_id, stimulus_title, stimulus_content, question_text, options_json, explanation
+        FROM question_translations
+        WHERE language_code = ?
+      `).all(n.language_code))a[s.question_id]=s;let i=JSON.parse(n.answers_json||"{}"),u=o.map(e=>{let s=a[e.id],t=i[e.id]||"",n=t.toUpperCase()===e.correct_answer.toUpperCase(),o=s?.options_json?JSON.parse(s.options_json):JSON.parse(e.options_json);return{question_id:e.id,level_title:e.level_title,question_text:s?.question_text||e.question_text,stimulus_title:s?.stimulus_title||e.stimulus_title,stimulus_content:s?.stimulus_content||e.stimulus_content,selected_option:t,correct_option:e.correct_answer,is_correct:n,explanation:s?.explanation||e.explanation,skill_category:e.skill_category,options:o}});return r.NextResponse.json({success:!0,data:{id:n.id,session_id:n.session_id,total_score:n.total_score,max_score:n.max_score,percentage:n.percentage,meets_benchmark:!!n.meets_benchmark,provisional_level:n.provisional_level,provisional_level_num:n.provisional_level_num,category_scores:JSON.parse(n.category_scores_json),level_scores:JSON.parse(n.level_scores_json),strongest_skill:n.strongest_skill,improvement_areas:JSON.parse(n.improvement_areas_json),generated_at:n.generated_at,state_name:n.state_name,city_name:n.city_name||n.city_other||"Not specified",language_name:n.language_name,detailed_reviews:u,disclaimer:"Preliminary assessment result — pilot framework. Not a statistically validated national proficiency classification."}})}catch(e){return r.NextResponse.json({success:!1,error:e.message},{status:500})}}let c=new o.AppRouteRouteModule({definition:{kind:a.x.APP_ROUTE,page:"/api/assessment/results/[sessionId]/route",pathname:"/api/assessment/results/[sessionId]",filename:"route",bundlePath:"app/api/assessment/results/[sessionId]/route"},resolvedPagePath:"C:\\dev\\survey\\src\\app\\api\\assessment\\results\\[sessionId]\\route.ts",nextConfigOutput:"",userland:n}),{requestAsyncStorage:p,staticGenerationAsyncStorage:d,serverHooks:m}=c,g="/api/assessment/results/[sessionId]/route";function v(){return(0,i.patchFetch)({serverHooks:m,staticGenerationAsyncStorage:d})}}};var s=require("../../../../../webpack-runtime.js");s.C(e);var t=e=>s(s.s=e),n=s.X(0,[276,972,716],()=>t(4530));module.exports=n})();

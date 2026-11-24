@@ -1,0 +1,23 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/assessment/session/[id]/route": "app/api/assessment/session/[id]/route.js",
+  "/api/assessment/save-progress/route": "app/api/assessment/save-progress/route.js",
+  "/api/assessment/results/[sessionId]/route": "app/api/assessment/results/[sessionId]/route.js",
+  "/api/admin/login/route": "app/api/admin/login/route.js",
+  "/api/languages/route": "app/api/languages/route.js",
+  "/api/locations/states/route": "app/api/locations/states/route.js",
+  "/page": "app/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/api/admin/stats/route": "app/api/admin/stats/route.js",
+  "/api/admin/export/route": "app/api/admin/export/route.js",
+  "/api/admin/questions/route": "app/api/admin/questions/route.js",
+  "/api/assessment/start/route": "app/api/assessment/start/route.js",
+  "/api/assessment/questions/route": "app/api/assessment/questions/route.js",
+  "/api/locations/cities/route": "app/api/locations/cities/route.js",
+  "/api/stats/overview/route": "app/api/stats/overview/route.js",
+  "/api/facts/route": "app/api/facts/route.js",
+  "/api/trivia/questions/route": "app/api/trivia/questions/route.js",
+  "/explore/page": "app/explore/page.js",
+  "/facts/page": "app/facts/page.js",
+  "/api/assessment/submit/route": "app/api/assessment/submit/route.js"
+}

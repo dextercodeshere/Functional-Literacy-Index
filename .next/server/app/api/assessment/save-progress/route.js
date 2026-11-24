@@ -1,0 +1,9 @@
+"use strict";(()=>{var e={};e.id=39,e.ids=[39],e.modules={399:e=>{e.exports=require("next/dist/compiled/next-server/app-page.runtime.prod.js")},517:e=>{e.exports=require("next/dist/compiled/next-server/app-route.runtime.prod.js")},5861:e=>{e.exports=require("node:sqlite")},7561:e=>{e.exports=require("node:fs")},9411:e=>{e.exports=require("node:path")},2215:(e,s,r)=>{r.r(s),r.d(s,{originalPathname:()=>g,patchFetch:()=>x,requestAsyncStorage:()=>l,routeModule:()=>c,serverHooks:()=>m,staticGenerationAsyncStorage:()=>v});var t={};r.r(t),r.d(t,{POST:()=>d});var n=r(9303),a=r(8716),o=r(3131),u=r(7070),i=r(5748),p=r(716);async function d(e){try{(0,p.Y)();let s=(0,i.z)(),{session_id:r,current_level:t,current_question:n,answers:a}=await e.json();if(!r)return u.NextResponse.json({success:!1,error:"session_id is required"},{status:400});let o=new Date().toISOString();return s.prepare(`
+      UPDATE assessment_sessions
+      SET 
+        current_level = COALESCE(?, current_level),
+        current_question = COALESCE(?, current_question),
+        answers_json = ?,
+        updated_at = ?
+      WHERE id = ? AND status = 'in_progress'
+    `).run(t,n,JSON.stringify(a||{}),o,r),u.NextResponse.json({success:!0,updated_at:o})}catch(e){return u.NextResponse.json({success:!1,error:e.message},{status:500})}}let c=new n.AppRouteRouteModule({definition:{kind:a.x.APP_ROUTE,page:"/api/assessment/save-progress/route",pathname:"/api/assessment/save-progress",filename:"route",bundlePath:"app/api/assessment/save-progress/route"},resolvedPagePath:"C:\\dev\\survey\\src\\app\\api\\assessment\\save-progress\\route.ts",nextConfigOutput:"",userland:t}),{requestAsyncStorage:l,staticGenerationAsyncStorage:v,serverHooks:m}=c,g="/api/assessment/save-progress/route";function x(){return(0,o.patchFetch)({serverHooks:m,staticGenerationAsyncStorage:v})}}};var s=require("../../../../webpack-runtime.js");s.C(e);var r=e=>s(s.s=e),t=s.X(0,[276,972,716],()=>r(2215));module.exports=t})();
